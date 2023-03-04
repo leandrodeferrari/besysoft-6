@@ -1,0 +1,2 @@
+2023-03-04 17:47:41,486 INFO com.besysoft.bootcamp.service.impl.PeliculaSerieServiceBDImpl [http-nio-8080-exec-2] Ocurrio una validacion personalizada, en el metodo actualizar(): Ya existe una pelicula/serie con ese título.
+2023-03-04 17:47:41,513 INFO com.besysoft.bootcamp.exception.handler.ApiControllerAdvice [http-nio-8080-exec-2] Ocurrio una validacion personalizada: Ya existe una pelicula/serie con ese título.

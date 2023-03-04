@@ -1,3 +1,7 @@
-2023-03-04 17:15:39,797 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-03-04 17:15:39,846 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
-2023-03-04 17:15:39,937 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2023-03-04 17:48:05,578 INFO com.besysoft.bootcamp.util.ValidacionGeneralUtil [http-nio-8080-exec-3] Ocurrio una validacion personalizada, en el metodo validarId(): El ID no puede ser menor a 1.
+2023-03-04 17:48:05,606 INFO com.besysoft.bootcamp.exception.handler.ApiControllerAdvice [http-nio-8080-exec-3] Ocurrio una validacion personalizada: El ID no puede ser menor a 1.
+2023-03-04 17:48:21,423 INFO com.besysoft.bootcamp.exception.handler.ApiControllerAdvice [http-nio-8080-exec-4] Ocurrio una validacion
+2023-03-04 17:48:21,428 INFO com.besysoft.bootcamp.exception.handler.ApiControllerAdvice [http-nio-8080-exec-4] Atributo: nombre - Validacion: El nombre no puede ser nulo o vacío.
+2023-03-04 17:48:41,985 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-04 17:48:42,017 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-03-04 17:48:42,128 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.

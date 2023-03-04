@@ -1,7 +1,6 @@
 package com.besysoft.bootcamp.exception.handler;
 
 import com.besysoft.bootcamp.dto.response.ExcepcionDto;
-import com.besysoft.bootcamp.exception.GeneroException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,9 +40,22 @@ public class ApiControllerAdvice {
     @ExceptionHandler
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ExcepcionDto isExist(GeneroException ex){
+    public ExcepcionDto badRequest(IllegalArgumentException ex){
+        log.info("Ocurrio una validacion personalizada: " + ex.getMessage());
         return new ExcepcionDto(
                 HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ExcepcionDto internalServerError(RuntimeException ex){
+        log.warn("Ocurrio algo inesperado en el servidor: " + ex.getMessage());
+        return new ExcepcionDto(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 ex.getMessage(),
                 null
         );
