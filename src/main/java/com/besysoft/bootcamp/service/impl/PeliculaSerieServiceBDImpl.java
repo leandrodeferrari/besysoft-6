@@ -5,6 +5,8 @@ import com.besysoft.bootcamp.domain.PeliculaSerie;
 import com.besysoft.bootcamp.dto.mapper.IPeliculaSerieMapper;
 import com.besysoft.bootcamp.dto.request.PeliculaSerieInDto;
 import com.besysoft.bootcamp.dto.response.PeliculaSerieOutDto;
+import com.besysoft.bootcamp.exception.GeneroException;
+import com.besysoft.bootcamp.exception.PeliculaSerieException;
 import com.besysoft.bootcamp.repository.database.IPeliculaSerieRepository;
 import com.besysoft.bootcamp.service.IGeneroService;
 import com.besysoft.bootcamp.service.IPeliculaSerieService;
@@ -67,7 +69,7 @@ public class PeliculaSerieServiceBDImpl implements IPeliculaSerieService {
             } else {
 
                 log.info("Ocurrio una validacion personalizada, en el metodo buscarPorFiltros(): " + PeliculaSerieUtil.NO_EXISTE_GENERO_POR_NOMBRE);
-                throw new IllegalArgumentException(PeliculaSerieUtil.NO_EXISTE_GENERO_POR_NOMBRE);
+                throw new GeneroException(PeliculaSerieUtil.NO_EXISTE_GENERO_POR_NOMBRE);
 
             }
 
@@ -102,7 +104,7 @@ public class PeliculaSerieServiceBDImpl implements IPeliculaSerieService {
             } else {
 
                 log.info("Ocurrio una validacion personalizada, en el metodo buscarPorFiltros(): " + PeliculaSerieUtil.NO_EXISTE_GENERO_POR_NOMBRE);
-                throw new IllegalArgumentException(PeliculaSerieUtil.NO_EXISTE_GENERO_POR_NOMBRE);
+                throw new GeneroException(PeliculaSerieUtil.NO_EXISTE_GENERO_POR_NOMBRE);
 
             }
 
@@ -149,7 +151,7 @@ public class PeliculaSerieServiceBDImpl implements IPeliculaSerieService {
 
         if(this.peliculaSerieRepository.existsByTitulo(dto.getTitulo())){
             log.info("Ocurrio una validacion personalizada, en el metodo crear(): " + PeliculaSerieUtil.EXISTE);
-            throw new IllegalArgumentException(PeliculaSerieUtil.EXISTE);
+            throw new PeliculaSerieException(PeliculaSerieUtil.EXISTE);
         }
 
         Optional<Genero> optionalGenero = this.generoService
@@ -165,7 +167,7 @@ public class PeliculaSerieServiceBDImpl implements IPeliculaSerieService {
         } else {
 
             log.info("Ocurrio una validacion personalizada, en el metodo crear(): " + PeliculaSerieUtil.NO_EXISTE_GENERO_POR_NOMBRE);
-            throw new IllegalArgumentException(PeliculaSerieUtil.NO_EXISTE_GENERO_POR_NOMBRE);
+            throw new GeneroException(PeliculaSerieUtil.NO_EXISTE_GENERO_POR_NOMBRE);
 
         }
 
@@ -180,12 +182,12 @@ public class PeliculaSerieServiceBDImpl implements IPeliculaSerieService {
 
         if(!this.peliculaSerieRepository.existsById(id)){
             log.info("Ocurrio una validacion personalizada, en el metodo actualizar(): " + PeliculaSerieUtil.NO_EXISTE_POR_ID);
-            throw new IllegalArgumentException(PeliculaSerieUtil.NO_EXISTE_POR_ID);
+            throw new PeliculaSerieException(PeliculaSerieUtil.NO_EXISTE_POR_ID);
         }
 
         if(this.peliculaSerieRepository.existsByTitulo(dto.getTitulo())){
             log.info("Ocurrio una validacion personalizada, en el metodo actualizar(): " + PeliculaSerieUtil.EXISTE_POR_TITULO);
-            throw new IllegalArgumentException(PeliculaSerieUtil.EXISTE_POR_TITULO);
+            throw new PeliculaSerieException(PeliculaSerieUtil.EXISTE_POR_TITULO);
         }
 
         Optional<Genero> optionalGenero = this.generoService
@@ -202,7 +204,7 @@ public class PeliculaSerieServiceBDImpl implements IPeliculaSerieService {
         } else {
 
             log.info("Ocurrio una validacion personalizada, en el metodo actualizar(): " + PeliculaSerieUtil.NO_EXISTE_GENERO_POR_NOMBRE);
-            throw new IllegalArgumentException(PeliculaSerieUtil.NO_EXISTE_GENERO_POR_NOMBRE);
+            throw new GeneroException(PeliculaSerieUtil.NO_EXISTE_GENERO_POR_NOMBRE);
 
         }
 

@@ -1,6 +1,7 @@
 package com.besysoft.bootcamp.exception.handler;
 
 import com.besysoft.bootcamp.dto.response.ExcepcionDto;
+import com.besysoft.bootcamp.exception.*;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,18 +10,20 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.format.DateTimeParseException;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@ControllerAdvice(annotations = RestController.class)
 @Slf4j
+@ControllerAdvice(annotations = RestController.class)
 public class ApiControllerAdvice {
 
     @ExceptionHandler
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ExcepcionDto exceptionHandler(MethodArgumentNotValidException ex){
+    public ExcepcionDto validException(MethodArgumentNotValidException ex){
 
         List<FieldError> errores = ex.getBindingResult().getFieldErrors();
 
@@ -40,8 +43,80 @@ public class ApiControllerAdvice {
     @ExceptionHandler
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ExcepcionDto badRequest(IllegalArgumentException ex){
-        log.info("Ocurrio una validacion personalizada: " + ex.getMessage());
+    public ExcepcionDto rangoInvalidoException(RangoInvalidoException ex){
+        log.info("Ocurrio una validacion de rango: " + ex.getMessage());
+        return new ExcepcionDto(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExcepcionDto idInvalidoException(IdInvalidoException ex){
+        log.info("Ocurrio una validacion de ID: " + ex.getMessage());
+        return new ExcepcionDto(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExcepcionDto dateTimeParseException(DateTimeParseException ex){
+        log.info("Ocurrio una validacion en el formato de la fecha: " + ex.getMessage());
+        return new ExcepcionDto(
+                HttpStatus.BAD_REQUEST.value(),
+                "Patrón incorrecto. El patrón correcto es 'dd-MM-yyyy'",
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExcepcionDto fechaException(FechaException ex){
+        log.info("Ocurrio una validacion de fecha: " + ex.getMessage());
+        return new ExcepcionDto(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExcepcionDto generoException(GeneroException ex){
+        log.info("Ocurrio una validacion de genero: " + ex.getMessage());
+        return new ExcepcionDto(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExcepcionDto peliculaSerieException(PeliculaSerieException ex){
+        log.info("Ocurrio una validacion de pelicula-serie: " + ex.getMessage());
+        return new ExcepcionDto(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                null
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExcepcionDto personajeException(PersonajeException ex){
+        log.info("Ocurrio una validacion de personaje: " + ex.getMessage());
         return new ExcepcionDto(
                 HttpStatus.BAD_REQUEST.value(),
                 ex.getMessage(),

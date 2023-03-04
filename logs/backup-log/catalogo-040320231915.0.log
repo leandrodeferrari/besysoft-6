@@ -1,0 +1,2 @@
+2023-03-04 19:15:25,603 INFO com.besysoft.bootcamp.exception.handler.ApiControllerAdvice [http-nio-8080-exec-8] Ocurrio una validacion en el formato de la fecha: Text 'string' could not be parsed at index 0
+2023-03-04 19:15:50,163 INFO com.besysoft.bootcamp.exception.handler.ApiControllerAdvice [http-nio-8080-exec-9] Ocurrio una validacion en el formato de la fecha: Text '2021-12-12' could not be parsed at index 2

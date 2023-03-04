@@ -1,7 +1,0 @@
-2023-03-04 17:43:00,927 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-03-04 17:43:00,943 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
-2023-03-04 17:43:00,955 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 10 ms
-2023-03-04 17:43:18,799 WARN com.besysoft.bootcamp.exception.handler.ApiControllerAdvice [http-nio-8080-exec-5] Ocurrio algo inesperado en el servidor: JSON parse error: Cannot deserialize value of type `java.lang.Byte` from String "string": not a valid Byte value; nested exception is com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `java.lang.Byte` from String "string": not a valid Byte value
- at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 2, column: 19] (through reference chain: com.besysoft.bootcamp.dto.request.PeliculaSerieInDto["calificacion"])
-2023-03-04 17:43:57,920 INFO com.besysoft.bootcamp.exception.handler.ApiControllerAdvice [http-nio-8080-exec-6] Ocurrio una validacion
-2023-03-04 17:43:57,954 INFO com.besysoft.bootcamp.exception.handler.ApiControllerAdvice [http-nio-8080-exec-6] Atributo: generoId - Validacion: El genero ID no puede ser menor a 1.

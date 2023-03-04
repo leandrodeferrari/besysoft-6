@@ -4,6 +4,7 @@ import com.besysoft.bootcamp.domain.Personaje;
 import com.besysoft.bootcamp.dto.mapper.IPersonajeMapper;
 import com.besysoft.bootcamp.dto.request.PersonajeInDto;
 import com.besysoft.bootcamp.dto.response.PersonajeOutDto;
+import com.besysoft.bootcamp.exception.PersonajeException;
 import com.besysoft.bootcamp.repository.database.IPersonajeRepository;
 import com.besysoft.bootcamp.service.IPersonajeService;
 import com.besysoft.bootcamp.util.PersonajeUtil;
@@ -102,7 +103,7 @@ public class PersonajeServiceBDImpl implements IPersonajeService {
 
         if(!this.personajeRepository.existsById(id)){
             log.info("Ocurrio una validacion personalizada, en el metodo actualizar(): " + PersonajeUtil.NO_EXISTE_POR_ID);
-            throw new IllegalArgumentException(PersonajeUtil.NO_EXISTE_POR_ID);
+            throw new PersonajeException(PersonajeUtil.NO_EXISTE_POR_ID);
         }
 
         Personaje personaje = this.personajeMapper.mapToEntity(dto);

@@ -1,5 +1,8 @@
 package com.besysoft.bootcamp.util;
 
+import com.besysoft.bootcamp.exception.IdInvalidoException;
+import com.besysoft.bootcamp.exception.RangoInvalidoException;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -13,7 +16,7 @@ public class ValidacionGeneralUtil {
 
         if(desde > hasta){
             log.info("Ocurrio una validacion personalizada, en el metodo validarRangoDeNumeros(): " + RANGO_INVALIDO);
-            throw new IllegalArgumentException(RANGO_INVALIDO);
+            throw new RangoInvalidoException(RANGO_INVALIDO);
         }
 
     }
@@ -22,12 +25,12 @@ public class ValidacionGeneralUtil {
 
         if(id == null){
             log.info("Ocurrio una validacion personalizada, en el metodo validarId(): " + ID_NULO);
-            throw new IllegalArgumentException(ID_NULO);
+            throw new IdInvalidoException(ID_NULO);
         }
 
         if(id < 1){
             log.info("Ocurrio una validacion personalizada, en el metodo validarId(): " + ID_MENOR_A_UNO);
-            throw new IllegalArgumentException(ID_MENOR_A_UNO);
+            throw new IdInvalidoException(ID_MENOR_A_UNO);
         }
 
     }

@@ -1,5 +1,7 @@
 package com.besysoft.bootcamp.util;
 
+import com.besysoft.bootcamp.exception.GeneroException;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -14,7 +16,7 @@ public class GeneroUtil {
 
         if(nombre.isBlank()){
             log.info("Ocurrio una validacion personalizada, en el metodo validarNombre(): " + NOMBRE_NULO_VACIO);
-            throw new IllegalArgumentException(NOMBRE_NULO_VACIO);
+            throw new GeneroException(NOMBRE_NULO_VACIO);
         }
 
     }

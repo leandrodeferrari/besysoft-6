@@ -4,6 +4,7 @@ import com.besysoft.bootcamp.domain.Genero;
 import com.besysoft.bootcamp.dto.mapper.IGeneroMapper;
 import com.besysoft.bootcamp.dto.request.GeneroInDto;
 import com.besysoft.bootcamp.dto.response.GeneroOutDto;
+import com.besysoft.bootcamp.exception.GeneroException;
 import com.besysoft.bootcamp.repository.database.IGeneroRepository;
 import com.besysoft.bootcamp.service.IGeneroService;
 import com.besysoft.bootcamp.util.GeneroUtil;
@@ -50,7 +51,7 @@ public class GeneroServiceBDImpl implements IGeneroService {
 
         if(this.generoRepository.existsByNombre(dto.getNombre())){
             log.info("Ocurrio una validacion personalizada, en el metodo crear(): " + GeneroUtil.EXISTE);
-            throw new IllegalArgumentException(GeneroUtil.EXISTE);
+            throw new GeneroException(GeneroUtil.EXISTE);
         }
 
         Genero genero = this.generoRepository.save(this.generoMapper.mapToEntity(dto));
@@ -68,12 +69,12 @@ public class GeneroServiceBDImpl implements IGeneroService {
 
         if(this.generoRepository.existsByNombre(dto.getNombre())){
             log.info("Ocurrio una validacion personalizada, en el metodo actualizar(): " + GeneroUtil.EXISTE_POR_NOMBRE);
-            throw new IllegalArgumentException(GeneroUtil.EXISTE_POR_NOMBRE);
+            throw new GeneroException(GeneroUtil.EXISTE_POR_NOMBRE);
         }
 
         if(!this.generoRepository.existsById(id)){
             log.info("Ocurrio una validacion personalizada, en el metodo actualizar(): " + GeneroUtil.NO_EXISTE_POR_ID);
-            throw new IllegalArgumentException(GeneroUtil.NO_EXISTE_POR_ID);
+            throw new GeneroException(GeneroUtil.NO_EXISTE_POR_ID);
         }
 
         Genero genero = this.generoMapper.mapToEntity(dto);

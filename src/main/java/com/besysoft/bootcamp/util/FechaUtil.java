@@ -1,5 +1,7 @@
 package com.besysoft.bootcamp.util;
 
+import com.besysoft.bootcamp.exception.FechaException;
+
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
@@ -28,7 +30,7 @@ public class FechaUtil {
 
         if(desde.compareTo(hasta) > 0){
             log.info("Ocurrio una validacion personalizada, en el metodo validarRango(): " + RANGO_INVALIDO);
-            throw new IllegalArgumentException(RANGO_INVALIDO);
+            throw new FechaException(RANGO_INVALIDO);
         }
 
     }
@@ -37,12 +39,12 @@ public class FechaUtil {
 
         if(fecha == null){
             log.info("Ocurrio una validacion personalizada, en el metodo validar(): " + FECHA_NULA);
-            throw new IllegalArgumentException(FECHA_NULA);
+            throw new FechaException(FECHA_NULA);
         }
 
         if(fecha.isAfter(LocalDate.now())){
             log.info("Ocurrio una validacion personalizada, en el metodo validar(): " + FECHA_FUTURA);
-            throw new IllegalArgumentException(FECHA_FUTURA);
+            throw new FechaException(FECHA_FUTURA);
         }
 
     }

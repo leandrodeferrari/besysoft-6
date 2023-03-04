@@ -2,6 +2,8 @@ package com.besysoft.bootcamp.util;
 
 import com.besysoft.bootcamp.domain.PeliculaSerie;
 import com.besysoft.bootcamp.dto.request.PeliculaSerieInDto;
+import com.besysoft.bootcamp.exception.GeneroException;
+import com.besysoft.bootcamp.exception.PeliculaSerieException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,12 +40,12 @@ public class PeliculaSerieUtil {
 
         if(calificacion == null){
             log.info("Ocurrio una validacion personalizada, en el metodo validarCalificacion(): " + CALIFICACION_NULA);
-            throw new IllegalArgumentException(CALIFICACION_NULA);
+            throw new PeliculaSerieException(CALIFICACION_NULA);
         }
 
         if(calificacion < 1 || calificacion > 5){
             log.info("Ocurrio una validacion personalizada, en el metodo validarCalificacion(): " + CALIFICACION_RANGO);
-            throw new IllegalArgumentException(CALIFICACION_RANGO);
+            throw new PeliculaSerieException(CALIFICACION_RANGO);
         }
 
     }
@@ -52,7 +54,7 @@ public class PeliculaSerieUtil {
 
         if(titulo.isBlank()){
             log.info("Ocurrio una validacion personalizada, en el metodo validarTitulo(): " + TITULO_NULO_VACIO);
-            throw new IllegalArgumentException(TITULO_NULO_VACIO);
+            throw new PeliculaSerieException(TITULO_NULO_VACIO);
         }
 
     }
@@ -61,7 +63,7 @@ public class PeliculaSerieUtil {
 
         if(titulo.isEmpty()){
             log.info("Ocurrio una validacion personalizada, en el metodo validarTituloVacio(): " + TITULO_VACIO);
-            throw new IllegalArgumentException(TITULO_VACIO);
+            throw new PeliculaSerieException(TITULO_VACIO);
         }
 
     }
@@ -70,7 +72,7 @@ public class PeliculaSerieUtil {
 
         if(nombreGenero.isEmpty()){
             log.info("Ocurrio una validacion personalizada, en el metodo validarNombreGeneroVacio(): " + NOMBRE_GENERO_VACIO);
-            throw new IllegalArgumentException(NOMBRE_GENERO_VACIO);
+            throw new GeneroException(NOMBRE_GENERO_VACIO);
         }
 
     }

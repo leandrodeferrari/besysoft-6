@@ -2,6 +2,7 @@ package com.besysoft.bootcamp.util;
 
 import com.besysoft.bootcamp.domain.Personaje;
 import com.besysoft.bootcamp.dto.request.PersonajeInDto;
+import com.besysoft.bootcamp.exception.PersonajeException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,7 +41,7 @@ public class PersonajeUtil {
 
         if(edad == null){
             log.info("Ocurrio una validacion personalizada, en el metodo validarEdad(): " + EDAD_NULA);
-            throw new IllegalArgumentException(EDAD_NULA);
+            throw new PersonajeException(EDAD_NULA);
         }
 
         validarEdadMinima(edad);
@@ -51,7 +52,7 @@ public class PersonajeUtil {
 
         if(edad < 0){
             log.info("Ocurrio una validacion personalizada, en el metodo validarEdadMinima(): " + EDAD_MENOR_A_CERO);
-            throw new IllegalArgumentException(EDAD_MENOR_A_CERO);
+            throw new PersonajeException(EDAD_MENOR_A_CERO);
         }
 
     }
@@ -60,7 +61,7 @@ public class PersonajeUtil {
 
         if(nombre.isBlank()){
             log.info("Ocurrio una validacion personalizada, en el metodo validarNombre(): " + NOMBRE_NULO_VACIO);
-            throw new IllegalArgumentException(NOMBRE_NULO_VACIO);
+            throw new PersonajeException(NOMBRE_NULO_VACIO);
         }
 
     }
@@ -69,7 +70,7 @@ public class PersonajeUtil {
 
         if(nombre.isEmpty()){
             log.info("Ocurrio una validacion personalizada, en el metodo validarNombreVacio(): " + NOMBRE_VACIO);
-            throw new IllegalArgumentException(NOMBRE_VACIO);
+            throw new PersonajeException(NOMBRE_VACIO);
         }
 
     }
@@ -78,17 +79,17 @@ public class PersonajeUtil {
 
         if(peso == null){
             log.info("Ocurrio una validacion personalizada, en el metodo validarPeso(): " + PESO_NULO);
-            throw new IllegalArgumentException(PESO_NULO);
+            throw new PersonajeException(PESO_NULO);
         }
 
         if(peso < 0){
             log.info("Ocurrio una validacion personalizada, en el metodo validarPeso(): " + PESO_MENOR_A_CERO);
-            throw new IllegalArgumentException(PESO_MENOR_A_CERO);
+            throw new PersonajeException(PESO_MENOR_A_CERO);
         }
 
         if(peso > 500){
             log.info("Ocurrio una validacion personalizada, en el metodo validarPeso(): " + PESO_MAYOR_A_QUINIENTOS);
-            throw new IllegalArgumentException(PESO_MAYOR_A_QUINIENTOS);
+            throw new PersonajeException(PESO_MAYOR_A_QUINIENTOS);
         }
 
     }
@@ -97,7 +98,7 @@ public class PersonajeUtil {
 
         if(historia.isBlank()){
             log.info("Ocurrio una validacion personalizada, en el metodo validarHistoria(): " + HISTORIA_NULA_VACIA);
-            throw new IllegalArgumentException(HISTORIA_NULA_VACIA);
+            throw new PersonajeException(HISTORIA_NULA_VACIA);
         }
 
     }
