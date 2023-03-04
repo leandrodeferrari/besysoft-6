@@ -3,6 +3,9 @@ package com.besysoft.bootcamp.controller;
 import com.besysoft.bootcamp.dto.request.PersonajeInDto;
 import com.besysoft.bootcamp.service.IPersonajeService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.http.HttpStatus;
@@ -13,6 +16,7 @@ import javax.validation.Valid;
 
 @Slf4j
 @RestController
+@Api(value = "Endpoints - Personaje", tags = "Acciones permitidas para la entidad de Personaje")
 @RequestMapping("/personajes")
 public class PersonajeController {
 
@@ -23,6 +27,7 @@ public class PersonajeController {
     }
 
     @GetMapping
+    @ApiOperation(value = "Permite obtener todos los Personajes, según los filtros establecidos")
     public ResponseEntity<?> buscarPorFiltros(@RequestParam(required = false) String nombre,
                                               @RequestParam(required = false) Byte edad){
 
@@ -39,6 +44,7 @@ public class PersonajeController {
     }
 
     @GetMapping("/edades")
+    @ApiOperation(value = "Permite obtener todos los Personajes, según el rango de edades establecido")
     public ResponseEntity<?> buscarPorEdades(@RequestParam Byte desde,
                                              @RequestParam Byte hasta){
 
@@ -55,6 +61,7 @@ public class PersonajeController {
     }
 
     @PostMapping
+    @ApiOperation(value = "Permite la creación de un Personaje")
     public ResponseEntity<?> crear(@Valid @RequestBody PersonajeInDto dto){
 
         try {
@@ -70,6 +77,7 @@ public class PersonajeController {
     }
 
     @PutMapping("/{id}")
+    @ApiOperation(value = "Permite la modificación de un Personaje")
     public ResponseEntity<?> actualizar(@PathVariable Long id,
                                         @Valid @RequestBody PersonajeInDto dto){
 
