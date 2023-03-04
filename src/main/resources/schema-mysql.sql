@@ -1,0 +1,45 @@
+DROP DATABASE IF EXISTS ejercicio_4;
+
+CREATE DATABASE IF NOT EXISTS ejercicio_4;
+
+USE ejercicio_4;
+
+CREATE TABLE IF NOT EXISTS generos(
+	ID BIGINT AUTO_INCREMENT NOT NULL,
+    NOMBRE VARCHAR(30) NOT NULL,
+    CONSTRAINT PK_generos_id PRIMARY KEY(ID),
+    CONSTRAINT UQ_generos_nombre UNIQUE(NOMBRE)
+);
+
+CREATE TABLE IF NOT EXISTS personajes(
+	ID BIGINT AUTO_INCREMENT NOT NULL,
+    NOMBRE VARCHAR(30) NOT NULL,
+    EDAD TINYINT UNSIGNED NOT NULL,
+    PESO DOUBLE NOT NULL,
+    HISTORIA VARCHAR(255) NOT NULL,
+    CONSTRAINT PK_personajes_id PRIMARY KEY(ID),
+    CONSTRAINT CK_personajes_edad CHECK(EDAD <= 127),
+    CONSTRAINT CK_personajes_peso CHECK(PESO <= 500.0)
+);
+
+CREATE TABLE IF NOT EXISTS peliculas_series(
+	ID BIGINT AUTO_INCREMENT NOT NULL,
+    TITULO VARCHAR(50) NOT NULL,
+    FECHA_DE_CREACION DATE NOT NULL,
+    CALIFICACION TINYINT UNSIGNED NOT NULL,
+    GENERO_ID BIGINT NOT NULL,
+    CONSTRAINT PK_peliculas_series_id PRIMARY KEY(ID),
+    CONSTRAINT FK_peliculas_series_genero_id FOREIGN KEY(GENERO_ID) REFERENCES ejercicio_4.generos(ID),
+    CONSTRAINT UQ_peliculas_series_titulo UNIQUE(TITULO),
+	CONSTRAINT CK_peliculas_series_calificacion CHECK(CALIFICACION <= 5)
+);
+
+CREATE TABLE IF NOT EXISTS personajes_peliculas_series(
+	ID BIGINT AUTO_INCREMENT NOT NULL,
+    PERSONAJE_ID BIGINT NOT NULL,
+    PELICULA_SERIE_ID BIGINT NOT NULL,
+    CONSTRAINT PK_personajes_peliculas_series_id PRIMARY KEY(ID),
+    CONSTRAINT FK_personajes_peliculas_series_personaje_id FOREIGN KEY(PERSONAJE_ID) REFERENCES ejercicio_4.personajes(ID),
+    CONSTRAINT FK_personajes_peliculas_series_pelicula_serie_id FOREIGN KEY(PELICULA_SERIE_ID) REFERENCES ejercicio_4.peliculas_series(ID),
+    CONSTRAINT UQ_personajes_peliculas_series_personaje_id_pelicula_serie_id UNIQUE(PERSONAJE_ID, PELICULA_SERIE_ID)
+);
