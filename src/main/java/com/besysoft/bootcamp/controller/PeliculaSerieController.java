@@ -7,13 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Slf4j
 @RestController
@@ -75,22 +71,7 @@ public class PeliculaSerieController {
     }
 
     @PostMapping
-    public ResponseEntity<?> crear(@Valid @RequestBody PeliculaSerieInDto dto,
-                                   BindingResult result){
-
-        if(result.hasErrors()){
-
-            Map<String, String> validaciones = new HashMap<>();
-            log.info("Ocurrio una validacion, en el metodo crear().");
-
-            result.getFieldErrors().forEach(error -> {
-                log.info("Atributo: " + error.getField() + " - Validacion: " + error.getDefaultMessage());
-                validaciones.put(error.getField(), error.getDefaultMessage());
-            });
-
-            return ResponseEntity.badRequest().body(validaciones);
-
-        }
+    public ResponseEntity<?> crear(@Valid @RequestBody PeliculaSerieInDto dto){
 
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(this.peliculaSerieService.crear(dto));
@@ -106,22 +87,7 @@ public class PeliculaSerieController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> actualizar(@PathVariable Long id,
-                                        @Valid @RequestBody PeliculaSerieInDto dto,
-                                        BindingResult result){
-
-        if(result.hasErrors()){
-
-            Map<String, String> validaciones = new HashMap<>();
-            log.info("Ocurrio una validacion, en el metodo actualizar().");
-
-            result.getFieldErrors().forEach(error -> {
-                log.info("Atributo: " + error.getField() + " - Validacion: " + error.getDefaultMessage());
-                validaciones.put(error.getField(), error.getDefaultMessage());
-            });
-
-            return ResponseEntity.badRequest().body(validaciones);
-
-        }
+                                        @Valid @RequestBody PeliculaSerieInDto dto){
 
         try {
             return ResponseEntity.ok(this.peliculaSerieService.actualizar(id, dto));
