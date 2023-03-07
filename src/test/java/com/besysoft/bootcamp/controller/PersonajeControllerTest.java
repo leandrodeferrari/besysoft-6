@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -53,7 +54,9 @@ class PersonajeControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 //THEN
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(esperado.size())))
+                .andExpect(content().json(this.objectMapper.writeValueAsString(esperado)));
         verify(this.personajeService).buscarPorFiltros(isNull(), isNull());
     }
 
@@ -71,7 +74,9 @@ class PersonajeControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 //THEN
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(esperado.size())))
+                .andExpect(content().json(this.objectMapper.writeValueAsString(esperado)));
         verify(this.personajeService).buscarPorFiltros(anyString(), isNull());
     }
 
@@ -89,7 +94,9 @@ class PersonajeControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 //THEN
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(esperado.size())))
+                .andExpect(content().json(this.objectMapper.writeValueAsString(esperado)));
         verify(this.personajeService).buscarPorFiltros(isNull(), anyByte());
     }
 
@@ -109,7 +116,9 @@ class PersonajeControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 //THEN
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(esperado.size())))
+                .andExpect(content().json(this.objectMapper.writeValueAsString(esperado)));
         verify(this.personajeService).buscarPorFiltros(anyString(), anyByte());
     }
 
@@ -128,7 +137,9 @@ class PersonajeControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 //THEN
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(esperado.size())))
+                .andExpect(content().json(this.objectMapper.writeValueAsString(esperado)));
         verify(this.personajeService).buscarPorEdades(anyByte(), anyByte());
     }
 
@@ -145,10 +156,7 @@ class PersonajeControllerTest {
                 .content(this.objectMapper.writeValueAsString(dto)))
                 //THEN
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.nombre").value(esperado.getNombre()))
-                .andExpect(jsonPath("$.edad").value(esperado.getEdad().toString()))
-                .andExpect(jsonPath("$.peso").value(esperado.getPeso().toString()))
-                .andExpect(jsonPath("$.historia").value(esperado.getHistoria()));
+                .andExpect(content().json(this.objectMapper.writeValueAsString(esperado)));
         verify(this.personajeService).crear(any(PersonajeInDto.class));
     }
 
@@ -164,10 +172,7 @@ class PersonajeControllerTest {
                         .content(this.objectMapper.writeValueAsString(dto)))
                 //THEN
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.nombre").value(esperado.getNombre()))
-                .andExpect(jsonPath("$.edad").value(esperado.getEdad().toString()))
-                .andExpect(jsonPath("$.peso").value(esperado.getPeso().toString()))
-                .andExpect(jsonPath("$.historia").value(esperado.getHistoria()));
+                .andExpect(content().json(this.objectMapper.writeValueAsString(esperado)));
         verify(this.personajeService).actualizar(anyLong(), any(PersonajeInDto.class));
     }
 

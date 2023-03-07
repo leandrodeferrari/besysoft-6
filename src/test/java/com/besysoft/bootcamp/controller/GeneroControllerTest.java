@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -53,8 +54,8 @@ class GeneroControllerTest {
             //THEN
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].nombre").value(esperado.get(0).getNombre()))
-                .andExpect(jsonPath("$[1].nombre").value(esperado.get(1).getNombre()));
+                .andExpect(jsonPath("$", hasSize(esperado.size())))
+                .andExpect(content().json(this.objectMapper.writeValueAsString(esperado)));
         verify(this.generoService).obtenerTodos();
     }
 
@@ -71,7 +72,8 @@ class GeneroControllerTest {
                 .content(this.objectMapper.writeValueAsString(dto)))
                 //THEN
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.nombre").value(esperado.getNombre()));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json(this.objectMapper.writeValueAsString(esperado)));
         verify(this.generoService).crear(any(GeneroInDto.class));
     }
 
@@ -87,7 +89,8 @@ class GeneroControllerTest {
                         .content(this.objectMapper.writeValueAsString(dto)))
                 //THEN
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.nombre").value(esperado.getNombre()));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json(this.objectMapper.writeValueAsString(esperado)));
         verify(this.generoService).actualizar(anyLong(), any(GeneroInDto.class));
     }
 

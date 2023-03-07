@@ -20,6 +20,7 @@ import java.time.LocalDate;
 
 import java.util.List;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -54,7 +55,9 @@ class PeliculaSerieControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 //THEN
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(esperado.size())))
+                .andExpect(content().json(this.objectMapper.writeValueAsString(esperado)));
         verify(this.peliculaSerieService).buscarPorFiltros(isNull(), isNull());
     }
 
@@ -70,7 +73,9 @@ class PeliculaSerieControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 //THEN
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(esperado.size())))
+                .andExpect(content().json(this.objectMapper.writeValueAsString(esperado)));
         verify(this.peliculaSerieService).buscarPorFiltros(isNull(), anyString());
 
     }
@@ -87,7 +92,9 @@ class PeliculaSerieControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 //THEN
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(esperado.size())))
+                .andExpect(content().json(this.objectMapper.writeValueAsString(esperado)));
         verify(this.peliculaSerieService).buscarPorFiltros(anyString(), isNull());
     }
 
@@ -105,7 +112,9 @@ class PeliculaSerieControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 //THEN
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(esperado.size())))
+                .andExpect(content().json(this.objectMapper.writeValueAsString(esperado)));
         verify(this.peliculaSerieService).buscarPorFiltros(anyString(), anyString());
     }
 
@@ -124,7 +133,9 @@ class PeliculaSerieControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 //THEN
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(esperado.size())))
+                .andExpect(content().json(this.objectMapper.writeValueAsString(esperado)));
         verify(this.peliculaSerieService).buscarPorFechas(anyString(), anyString());
     }
 
@@ -143,7 +154,9 @@ class PeliculaSerieControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 //THEN
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(esperado.size())))
+                .andExpect(content().json(this.objectMapper.writeValueAsString(esperado)));
         verify(this.peliculaSerieService).buscarPorCalificaciones(anyByte(), anyByte());
     }
 
@@ -160,10 +173,7 @@ class PeliculaSerieControllerTest {
                 .content(this.objectMapper.writeValueAsString(dto)))
                 //THEN
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.titulo").value(esperado.getTitulo()))
-                .andExpect(jsonPath("$.calificacion").value(esperado.getCalificacion().toString()))
-                .andExpect(jsonPath("$.nombreGenero").value(esperado.getNombreGenero()))
-                .andExpect(jsonPath("$.fechaDeCreacion").value(esperado.getFechaDeCreacion()));
+                .andExpect(content().json(this.objectMapper.writeValueAsString(esperado)));
         verify(this.peliculaSerieService).crear(any(PeliculaSerieInDto.class));
     }
 
@@ -180,10 +190,7 @@ class PeliculaSerieControllerTest {
                         .content(this.objectMapper.writeValueAsString(dto)))
                 //THEN
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.titulo").value(esperado.getTitulo()))
-                .andExpect(jsonPath("$.calificacion").value(esperado.getCalificacion().toString()))
-                .andExpect(jsonPath("$.nombreGenero").value(esperado.getNombreGenero()))
-                .andExpect(jsonPath("$.fechaDeCreacion").value(esperado.getFechaDeCreacion()));
+                .andExpect(content().json(this.objectMapper.writeValueAsString(esperado)));
         verify(this.peliculaSerieService).actualizar(anyLong(), any(PeliculaSerieInDto.class));
     }
 
